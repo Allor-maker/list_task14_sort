@@ -1,16 +1,16 @@
 #include "list.h"
 #include <chrono>
-//int List::count = 0;
+
 void List::sort_list() 
 {
-    auto start = std::chrono::high_resolution_clock::now(); // Засекаем время начала
+    auto start = std::chrono::high_resolution_clock::now(); 
 
     if (!first || !first->Next) return;
     first = merge_sort(first, nullptr);
 
-    auto end = std::chrono::high_resolution_clock::now(); // Засекаем время конца
+    auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
-    std::cout << "Time taken for sorting: " << duration.count() << " seconds" << std::endl;
+    std::cout << "Time for sorting: " << duration.count() << std::endl;
 
 }
 
@@ -22,9 +22,9 @@ List::Node* List::merge_sort(Node* start, Node* end)
     Node* mid = get_mid(start, end);
     Node* next_mid = mid->Next;
     mid->Next = end;
+
     Node* left = merge_sort(start, mid->Next);
     Node* right = merge_sort(next_mid, end);
-
     return merge(left,right);
 
 }
